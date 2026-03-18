@@ -438,61 +438,101 @@
         .code-string { color: #F1FA8C; }
         .code-comment { color: #6272A4; }
 
-        /* Ecosystem */
+        /* Ecosystem - 3-column scrolling */
         .ecosystem {
             padding: 100px 20px;
             background: #FFFFFF;
+            overflow: hidden;
         }
 
-        .eco-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 32px;
+        .eco-scroll-wrapper {
             max-width: 1000px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            height: 440px;
+            overflow: hidden;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+
+        .eco-scroll-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .eco-scroll-col.scroll-up .eco-scroll-inner {
+            animation: ecoScrollUp 30s linear infinite;
+        }
+
+        .eco-scroll-col.scroll-down .eco-scroll-inner {
+            animation: ecoScrollDown 30s linear infinite;
+        }
+
+        .eco-scroll-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .eco-scroll-col:hover .eco-scroll-inner {
+            animation-play-state: paused;
+        }
+
+        @keyframes ecoScrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes ecoScrollDown {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
         }
 
         .eco-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 12px;
-            padding: 24px 16px;
+            gap: 16px;
+            padding: 20px 20px;
             background: #FFFFFF;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .eco-item:hover {
-            transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             border-color: #FF0013;
+            transform: scale(1.02);
         }
 
         .eco-icon {
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .eco-icon svg {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
         }
 
         .eco-name {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--text-primary);
-            text-align: center;
+            text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
 
         .eco-name small {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 400;
             color: var(--text-secondary);
         }
@@ -592,7 +632,7 @@
             overflow: hidden;
         }
 
-        /* Partners Section */
+        /* Partners Section - Square cards with hover overlay */
         .partners {
             padding: 100px 20px;
             background: var(--bg-light);
@@ -600,40 +640,81 @@
 
         .partner-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 40px;
-            max-width: 900px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .partner-item {
+            position: relative;
+            aspect-ratio: 1;
+            background: #FFFFFF;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            justify-content: center;
+            gap: 14px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            cursor: default;
+        }
+
+        .partner-item:hover {
+            border-color: #FF0013;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
         }
 
         .partner-logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.9;
-            transition: transform 0.3s ease;
+            transition: transform 0.35s ease;
         }
 
-        .partner-logo:hover {
-            transform: scale(1.1);
+        .partner-item:hover .partner-logo {
+            transform: scale(0.85) translateY(-8px);
         }
 
         .partner-logo svg {
-            width: 48px;
-            height: 48px;
+            width: 72px;
+            height: 72px;
         }
 
         .partner-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+            transition: transform 0.35s ease;
+        }
+
+        .partner-item:hover .partner-name {
+            transform: translateY(-6px);
+        }
+
+        .partner-desc {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.6) 70%, transparent 100%);
+            padding: 48px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.35s ease;
+        }
+
+        .partner-item:hover .partner-desc {
+            transform: translateY(0);
+        }
+
+        .partner-desc p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
             text-align: center;
         }
 
@@ -685,6 +766,7 @@
 
             .partner-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
             }
 
             .news-grid {
@@ -716,7 +798,7 @@
 
             .partner-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
+                gap: 16px;
             }
 
             .news-grid {
@@ -1101,111 +1183,274 @@
             <h2>TRON 生态全景</h2>
             <p>覆盖 DeFi、稳定币、跨链、基础设施等全场景，1,000+ 活跃 DApp</p>
         </div>
-        <div class="eco-grid">
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A17B"/><text x="16" y="21" text-anchor="middle" font-size="10" font-weight="bold" fill="white">USDD</text></svg></div>
-                <span class="eco-name">USDD <small>Stablecoin</small></span>
+        <div class="eco-scroll-wrapper">
+            <!-- Column 1: scroll up -->
+            <div class="eco-scroll-col scroll-up">
+                <div class="eco-scroll-inner">
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#26A17B"/><text x="20" y="26" text-anchor="middle" font-size="12" font-weight="bold" fill="white">USDD</text></svg></div>
+                        <span class="eco-name">USDD <small>Stablecoin</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF6B35"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">JL</text></svg></div>
+                        <span class="eco-name">JustLend DAO <small>Lending</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#231F20"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="#00D4FF">BTT</text></svg></div>
+                        <span class="eco-name">BitTorrent Chain <small>Cross-chain</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FFD700"/><text x="20" y="26" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A1A2E">SUN</text></svg></div>
+                        <span class="eco-name">SUN.io <small>AMM / DEX</small></span>
+                    </div>
+                    <!-- duplicate for infinite scroll -->
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#26A17B"/><text x="20" y="26" text-anchor="middle" font-size="12" font-weight="bold" fill="white">USDD</text></svg></div>
+                        <span class="eco-name">USDD <small>Stablecoin</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF6B35"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">JL</text></svg></div>
+                        <span class="eco-name">JustLend DAO <small>Lending</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#231F20"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="#00D4FF">BTT</text></svg></div>
+                        <span class="eco-name">BitTorrent Chain <small>Cross-chain</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FFD700"/><text x="20" y="26" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A1A2E">SUN</text></svg></div>
+                        <span class="eco-name">SUN.io <small>AMM / DEX</small></span>
+                    </div>
+                </div>
             </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF6B35"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">JL</text></svg></div>
-                <span class="eco-name">JustLend DAO <small>Lending</small></span>
+            <!-- Column 2: scroll down -->
+            <div class="eco-scroll-col scroll-down">
+                <div class="eco-scroll-inner">
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF0013"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">TL</text></svg></div>
+                        <span class="eco-name">TronLink <small>Wallet</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#8B5CF6"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">AI</text></svg></div>
+                        <span class="eco-name">AINFT <small>AI + NFT</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#4A90D9"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">im</text></svg></div>
+                        <span class="eco-name">imToken <small>Wallet</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#00D4FF"/><text x="20" y="26" text-anchor="middle" font-size="9" font-weight="bold" fill="white">WIN</text></svg></div>
+                        <span class="eco-name">WINkLink <small>Oracle</small></span>
+                    </div>
+                    <!-- duplicate for infinite scroll -->
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF0013"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">TL</text></svg></div>
+                        <span class="eco-name">TronLink <small>Wallet</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#8B5CF6"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">AI</text></svg></div>
+                        <span class="eco-name">AINFT <small>AI + NFT</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#4A90D9"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">im</text></svg></div>
+                        <span class="eco-name">imToken <small>Wallet</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#00D4FF"/><text x="20" y="26" text-anchor="middle" font-size="9" font-weight="bold" fill="white">WIN</text></svg></div>
+                        <span class="eco-name">WINkLink <small>Oracle</small></span>
+                    </div>
+                </div>
             </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#231F20"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="#00D4FF">BTT</text></svg></div>
-                <span class="eco-name">BitTorrent Chain <small>Cross-chain</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FFD700"/><text x="16" y="21" text-anchor="middle" font-size="10" font-weight="bold" fill="#1A1A2E">SUN</text></svg></div>
-                <span class="eco-name">SUN.io <small>AMM / DEX</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF0013"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">TL</text></svg></div>
-                <span class="eco-name">TronLink <small>Wallet</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#8B5CF6"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">AI</text></svg></div>
-                <span class="eco-name">AINFT <small>AI + NFT</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#4A90D9"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">im</text></svg></div>
-                <span class="eco-name">imToken <small>Wallet</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#00D4FF"/><text x="16" y="21" text-anchor="middle" font-size="7" font-weight="bold" fill="white">WIN</text></svg></div>
-                <span class="eco-name">WINkLink <small>Oracle</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF9500"/><text x="16" y="21" text-anchor="middle" font-size="7" font-weight="bold" fill="white">TP</text></svg></div>
-                <span class="eco-name">TokenPocket <small>Wallet</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#1A1A2E"/><text x="16" y="21" text-anchor="middle" font-size="7" font-weight="bold" fill="#00D4FF">BTFS</text></svg></div>
-                <span class="eco-name">BTFS <small>Decentralized Storage</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF0013"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">TS</text></svg></div>
-                <span class="eco-name">TronScan <small>Block Explorer</small></span>
-            </div>
-            <div class="eco-item">
-                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#000000"/><text x="16" y="21" text-anchor="middle" font-size="6" font-weight="bold" fill="white">LG</text></svg></div>
-                <span class="eco-name">Ledger <small>Hardware Wallet</small></span>
+            <!-- Column 3: scroll up -->
+            <div class="eco-scroll-col scroll-up">
+                <div class="eco-scroll-inner">
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF9500"/><text x="20" y="26" text-anchor="middle" font-size="9" font-weight="bold" fill="white">TP</text></svg></div>
+                        <span class="eco-name">TokenPocket <small>Wallet</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1A1A2E"/><text x="20" y="26" text-anchor="middle" font-size="9" font-weight="bold" fill="#00D4FF">BTFS</text></svg></div>
+                        <span class="eco-name">BTFS <small>Decentralized Storage</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF0013"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">TS</text></svg></div>
+                        <span class="eco-name">TronScan <small>Block Explorer</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#000000"/><text x="20" y="26" text-anchor="middle" font-size="8" font-weight="bold" fill="white">LG</text></svg></div>
+                        <span class="eco-name">Ledger <small>Hardware Wallet</small></span>
+                    </div>
+                    <!-- duplicate for infinite scroll -->
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF9500"/><text x="20" y="26" text-anchor="middle" font-size="9" font-weight="bold" fill="white">TP</text></svg></div>
+                        <span class="eco-name">TokenPocket <small>Wallet</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1A1A2E"/><text x="20" y="26" text-anchor="middle" font-size="9" font-weight="bold" fill="#00D4FF">BTFS</text></svg></div>
+                        <span class="eco-name">BTFS <small>Decentralized Storage</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FF0013"/><text x="20" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="white">TS</text></svg></div>
+                        <span class="eco-name">TronScan <small>Block Explorer</small></span>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#000000"/><text x="20" y="26" text-anchor="middle" font-size="8" font-weight="bold" fill="white">LG</text></svg></div>
+                        <span class="eco-name">Ledger <small>Hardware Wallet</small></span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 合作伙伴 -->
+    <!-- 全球合作伙伴 -->
     <section class="partners">
         <div class="section-header">
             <h2>全球合作伙伴</h2>
+            <p>与全球顶级企业和平台共建 Web3 基础设施</p>
         </div>
         <div class="partner-grid">
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1428A0"/><path d="M24 12C18.477 12 14 16.477 14 22C14 27.523 18.477 32 24 32C29.523 32 34 27.523 34 22C34 16.477 29.523 12 24 12ZM21 18H27V20H21V18ZM21 22H27V30H21V22Z" fill="white"/></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#1428A0"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="white">S</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Samsung</span>
+                <div class="partner-desc">
+                    <p>Samsung Blockchain Wallet 原生集成 TRON，全球数亿 Galaxy 设备用户可直接管理 TRX 资产</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#26A17B"/><path d="M24 14C19.582 14 16 17.582 16 22H18C18 18.686 20.686 16 24 16C27.314 16 30 18.686 30 22C30 25.314 27.314 28 24 28V30C28.418 30 32 26.418 32 22C32 17.582 28.418 14 24 14Z" fill="white"/></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#26A17B"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="white">T</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Tether</span>
+                <div class="partner-desc">
+                    <p>全球最大稳定币 USDT 的发行方，TRON 承载超 $60B TRC20-USDT 流通量，是 Tether 最大的链上网络</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#FF9900"/><path d="M24 14C18.477 14 14 18.477 14 24C14 29.523 18.477 34 24 34C29.523 34 34 29.523 34 24C34 18.477 29.523 14 24 14Z" fill="white"/><text x="24" y="29" text-anchor="middle" font-size="16" font-weight="bold" fill="#FF9900">a</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#FF9900"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="white">a</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Amazon</span>
+                <div class="partner-desc">
+                    <p>AWS 云服务为 TRON 生态提供企业级基础设施支持，助力 DApp 全球化部署和高可用运行</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#4285F4"/><path d="M24 14C18.477 14 14 18.477 14 24C14 29.523 18.477 34 24 34C29.523 34 34 29.523 34 24H32C32 27.314 29.314 30 26 30C22.686 30 20 27.314 20 24C20 20.686 22.686 18 26 18V14C20.477 14 16 18.477 16 24C16 29.523 20.477 34 26 34H28V30H26C22.686 30 20 27.314 20 24" fill="white"/></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#4285F4"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="white">G</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Google</span>
+                <div class="partner-desc">
+                    <p>Google Cloud 为 TRON 网络提供数据分析和区块链节点托管支持，加速 Web3 企业级应用落地</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#CF0A2C"/><text x="24" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="white">H</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#CF0A2C"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="white">H</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Huawei</span>
+                <div class="partner-desc">
+                    <p>华为云与 TRON 在分布式存储及区块链基础设施领域开展技术合作，推进企业级 Web3 解决方案</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1A1A2E"/><text x="24" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF6B6B">N</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#1A1A2E"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="#FF6B6B">N</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Nansen</span>
+                <div class="partner-desc">
+                    <p>顶级链上数据分析平台，深度覆盖 TRON 链上数据，为机构和个人投资者提供实时洞察</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1A1A2E"/><text x="24" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF6B6B">D</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#1A1A2E"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="#FF6B6B">D</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Dune</span>
+                <div class="partner-desc">
+                    <p>社区驱动的区块链数据分析平台，已全面支持 TRON 数据查询和可视化仪表盘</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#0052CC"/><text x="24" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="white">SCB</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#0052CC"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="white">SCB</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Swisscom</span>
+                <div class="partner-desc">
+                    <p>瑞士最大电信运营商旗下 Swisscom Blockchain 为 TRON 提供合规和企业级区块链服务</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#E6B91E"/><text x="24" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1A1A2E">P</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#E6B91E"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="white">P</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Poloniex</span>
+                <div class="partner-desc">
+                    <p>全球知名加密货币交易所，深度支持 TRX 及 TRC20 代币交易，提供高流动性交易对</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#231F20"/><text x="24" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#00D4FF">BTT</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#231F20"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#00D4FF">BTT</text>
+                    </svg>
+                </div>
                 <span class="partner-name">BitTorrent</span>
+                <div class="partner-desc">
+                    <p>全球最大去中心化 P2P 文件共享网络，TRON 生态核心组成部分，拥有超过 1 亿活跃用户</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#FF6600"/><text x="24" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="white">O</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#FF6600"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="white">O</text>
+                    </svg>
+                </div>
                 <span class="partner-name">Opera</span>
+                <div class="partner-desc">
+                    <p>全球用户超 3.5 亿的浏览器，内置 Web3 钱包原生支持 TRON 网络和 TRC20 代币</p>
+                </div>
             </div>
             <div class="partner-item">
-                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1E1E1E"/><text x="24" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#00D4FF">TV</text></svg></div>
+                <div class="partner-logo">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                        <rect width="72" height="72" rx="16" fill="#1E1E1E"/>
+                        <text x="36" y="44" text-anchor="middle" font-size="14" font-weight="bold" fill="#00D4FF">TV</text>
+                    </svg>
+                </div>
                 <span class="partner-name">TradingView</span>
+                <div class="partner-desc">
+                    <p>全球最大的金融图表和社交交易平台，提供实时 TRX 行情数据、技术分析和交易信号</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1402,6 +1647,8 @@
 
         .tron-header .nav-item {
             position: relative;
+            padding-bottom: 12px;
+            margin-bottom: -12px;
         }
 
         .tron-header .nav-link {
@@ -1422,19 +1669,27 @@
             position: absolute;
             top: 100%;
             left: 50%;
-            transform: translateX(-50%) translateY(20px);
+            transform: translateX(-50%);
             background: #1a1a1a;
             border-radius: 12px;
             padding: 24px 32px;
-            display: none;
             min-width: 280px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(8px);
         }
 
         .tron-header .nav-item:hover .nav-dropdown {
             display: flex;
             gap: 40px;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
         }
 
         .tron-header .dropdown-section {
