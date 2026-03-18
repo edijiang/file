@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRON Network - 去中心化互联网</title>
+    <link rel="stylesheet" href="https://unpkg.com/antd@3.26.16/dist/antd.css">
+    <link rel="stylesheet" href="https://static.tron.network/tron_network/iconfont/iconfont.css">
+    <style>
+        :root {
+            --primary-color: #FF0013;
+            --primary-dark: #E00010;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --bg-light: #F8F9FA;
+            --bg-dark: #0D0D0D;
+            --border-color: #E5E5E5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A2E 100%);
+            padding: 160px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 0, 19, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 0, 19, 0.15);
+            border: 1px solid rgba(255, 0, 19, 0.3);
+            color: #FF0013;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #FF0013, #FF4D4D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #FF0013;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background: #E00010;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 19, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #FFFFFF;
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: #FF0013;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* User Section */
+        .user-section {
+            padding: 100px 20px;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        .user-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .user-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 40px 32px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .user-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #FF0013;
+        }
+
+        .step-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF0013 0%, #FF4D4D 100%);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .user-card-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #FF0013 0%, #FF4D4D 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+
+        .user-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .user-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .user-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #FF0013;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .user-card-link:hover {
+            gap: 12px;
+        }
+
+        .user-card-eco {
+            background: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 100%);
+        }
+
+        .user-card-eco h3,
+        .user-card-eco p {
+            color: #FFFFFF;
+        }
+
+        .user-card-eco p {
+            opacity: 0.8;
+        }
+
+        .eco-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .eco-showcase-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .eco-showcase-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .eco-showcase-item span {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Developer Section */
+        .dev-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A2E 100%);
+            color: #FFFFFF;
+        }
+
+        .dev-section .section-header h2 {
+            color: #FFFFFF;
+        }
+
+        .dev-section .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .dev-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+
+        .dev-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .dev-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #FF0013;
+        }
+
+        .dev-card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .dev-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #FFFFFF;
+        }
+
+        .dev-card p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .dev-card-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .dev-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .dev-link:hover {
+            background: #FF0013;
+        }
+
+        /* Code Preview */
+        .code-section {
+            padding: 80px 20px;
+            background: #0D0D0D;
+        }
+
+        .code-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .code-window {
+            background: #1A1A1A;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-header {
+            background: #2A2A2A;
+            padding: 16px 24px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #FF5F56; }
+        .code-dot.yellow { background: #FFBD2E; }
+        .code-dot.green { background: #27C93F; }
+
+        .code-content {
+            padding: 32px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .code-line {
+            display: flex;
+        }
+
+        .code-number {
+            color: rgba(255, 255, 255, 0.3);
+            min-width: 32px;
+            margin-right: 16px;
+        }
+
+        .code-text { color: #A5D6FF; }
+        .code-keyword { color: #FF79C6; }
+        .code-string { color: #F1FA8C; }
+        .code-comment { color: #6272A4; }
+
+        /* Ecosystem */
+        .ecosystem {
+            padding: 100px 20px;
+            background: #FFFFFF;
+        }
+
+        .eco-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .eco-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 16px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .eco-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-color: #FF0013;
+        }
+
+        .eco-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eco-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .eco-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .eco-name small {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* Latest News Section */
+        .news-section {
+            padding: 100px 20px;
+            background: #FFFFFF;
+        }
+
+        .news-section .section-header {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .news-section .section-header h2 {
+            margin-bottom: 16px;
+        }
+
+        .news-more {
+            color: #FF0013;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .news-more:hover {
+            gap: 8px;
+        }
+
+        .news-footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #FF0013;
+        }
+
+        .news-image {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .news-image svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .news-content {
+            padding: 24px;
+        }
+
+        .news-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .news-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .news-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Partners Section */
+        .partners {
+            padding: 100px 20px;
+            background: var(--bg-light);
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .partner-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            transform: scale(1.1);
+        }
+
+        .partner-logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .partner-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #FF0013 0%, #CC0010 100%);
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .cta h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .cta p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .user-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dev-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eco-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .partner-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eco-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .partner-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 32px;
+            }
+
+            .tab-container {
+                overflow-x: auto;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="tron-header" id="tron-header">
+        <div class="header-container">
+            <a href="/" class="header-logo">
+                <svg width="96" height="30" viewBox="0 0 96 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1_5515)">
+                        <path d="M72.8609 13.1744C72.0584 13.1744 71.4231 13.8097 71.4231 14.5788C71.4231 15.3478 72.0584 15.9832 72.8609 15.9832C73.6634 15.9832 74.2988 15.3478 74.2988 14.5788C74.2988 13.8097 73.6634 13.1744 72.8609 13.1744Z" fill="white"/>
+                        <path d="M47.5485 7.08868H34.1399V9.3959H47.5485V7.08868Z" fill="white"/>
+                        <path d="M40.3594 11.3019H38.0188V22.0689H40.3594V11.3019Z" fill="white"/>
+                        <path d="M43.7365 11.3019H41.3959V22.0689H43.7365V11.3019Z" fill="white"/>
+                        <path d="M86.002 22.1024H87.9748V16.4514L86.002 14.278V22.1024Z" fill="white"/>
+                        <path d="M93.6596 7.08884V17.6218L82.5917 5.48383V22.1024H84.9323V11.5695L96.0002 23.7074V7.08884H93.6596Z" fill="white"/>
+                        <path d="M72.8611 7.08868C68.6814 7.08868 65.2708 10.4659 65.2708 14.5788C65.2708 18.6916 68.6814 22.0688 72.8611 22.0688C77.0409 22.0688 80.4515 18.6916 80.4515 14.5788C80.4515 10.4659 77.0409 7.08868 72.8611 7.08868ZM72.8611 19.7951C69.952 19.7951 67.6114 17.4544 67.6114 14.6122C67.6114 11.77 69.9855 9.42933 72.8611 9.42933C75.7368 9.42933 78.1109 11.77 78.1109 14.6122C78.1109 17.4544 75.7368 19.7951 72.8611 19.7951Z" fill="white"/>
+                        <path d="M63.3313 11.8369C63.3313 9.22871 61.1913 7.08868 58.5497 7.08868H49.9227V22.1023H52.2299V9.42933H58.5497C59.8872 9.42933 60.9572 10.5328 60.9572 11.8703C60.9572 13.2078 59.8872 14.2778 58.5497 14.3113H53.2665V22.1357H55.5737V16.6185H57.9812L60.9238 22.1357H63.5988L60.4222 16.2172C62.1275 15.4816 63.2979 13.7428 63.2979 11.8703L63.3313 11.8369Z" fill="white"/>
+                        <path d="M21.4002 3.00942L0 1.33514e-05L11.9373 29.5925L28.4222 8.52666L21.4002 3.04286V3.00942ZM24.4431 8.09197L17.488 9.56324L21.0993 5.48382L24.4431 8.09197ZM18.8589 4.81506L14.4117 9.86417L5.55068 2.94254L18.8924 4.81506H18.8589ZM11.7701 23.3396L4.21317 4.64788L13.3751 11.8036L11.7701 23.3396ZM13.8767 23.6406L15.4817 12.2383L24.2424 10.3657L13.8767 23.6406Z" fill="#EA0029"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_1_5515">
+                            <rect width="96" height="30" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </a>
+            <nav class="header-nav">
+                <div class="nav-item">
+                    <a href="#" class="nav-link">入门</a>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-section">
+                            <h6>学习</h6>
+                            <a href="/trx">什么是 TRX？</a>
+                            <a href="/usdt">TRON 上的 USDT</a>
+                            <a href="/static/doc/white_paper_v_2_1.pdf" target="_blank">白皮书</a>
+                            <a href="/faq">常见问题</a>
+                        </div>
+                        <div class="dropdown-section">
+                            <h6>快速开始</h6>
+                            <a href="/trx">获取 TRX</a>
+                            <a href="/wallet">选择钱包</a>
+                            <a href="https://tronscan.org" target="_blank">区块浏览器</a>
+                            <a href="https://developers.tron.network/" target="_blank">开发者中心</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">开发</a>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-section single">
+                            <a href="https://developers.tron.network/" target="_blank">文档</a>
+                            <a href="https://developers.tron.network/docs/dapp-development-tools" target="_blank">开发工具</a>
+                            <a href="https://github.com/tronprotocol" target="_blank">GitHub</a>
+                            <a href="/static/doc/TRON_Protocol_Security_Audit_Report.pdf" target="_blank">审计报告</a>
+                            <a href="https://hackerone.com/tron_dao?type=team" target="_blank">漏洞赏金</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">生态</a>
+                    <div class="nav-dropdown ecosystem-dropdown">
+                        <div class="dropdown-section">
+                            <a href="https://usdd.io/" target="_blank">USDD</a>
+                            <a href="https://sun.io/" target="_blank">Sun.io</a>
+                            <a href="https://www.btfs.io/" target="_blank">BTFS</a>
+                            <a href="https://winklink.org/#/home" target="_blank">WinKlink</a>
+                        </div>
+                        <div class="dropdown-section">
+                            <a href="https://justlend.org/" target="_blank">JustLend</a>
+                            <a href="https://bt.io/" target="_blank">BitTorrent Chain</a>
+                            <a href="https://ainft.com/" target="_blank">AInft</a>
+                            <a href="https://web3.okx.com/zh-hans/dex-swap" target="_blank">OKX</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">治理</a>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-section single">
+                            <a href="https://tronscan.org/#/sr/representatives" target="_blank">超级代表</a>
+                            <a href="https://tronscan.org/#/sr/committee" target="_blank">参数</a>
+                            <a href="https://tronscan.org/#/sr/wallet-stake-home" target="_blank">质押</a>
+                            <a href="https://tronscan.org/#/sr/votes" target="_blank">投票</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">更多</a>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-section single">
+                            <a href="/resources">资源</a>
+                            <a href="/career/corevalues/">职业发展</a>
+                            <a href="/about">关于</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search..." />
+                </div>
+                <div class="language-switcher">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="zh" selected>简体中文</option>
+                        <option value="tw">繁體中文</option>
+                        <option value="kor">한국어</option>
+                        <option value="jap">日本語</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">全球最大 USDT 承载网络 · 25 亿用户的选择</div>
+            <h1>构建<span>无界</span>的金融未来</h1>
+            <p class="hero-subtitle">TRON 是全球最大的去中心化 USDT 网络。无论你身在何处，都能以极低手续费即时转账、存款生息、自由参与 DeFi——无需银行账户，无国界限制。</p>
+            <div class="hero-buttons">
+                <a href="https://tron.network/wallet/" class="btn btn-primary">
+                    <span>免费创建钱包</span>
+                </a>
+                <a href="https://developers.tron.network" class="btn btn-secondary">
+                    <span>开发者文档</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section - 首屏数据 -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">2.5B+</div>
+                <div class="stat-label">全球账户总数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">70B+</div>
+                <div class="stat-label">累计交易笔数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$15B+</div>
+                <div class="stat-label">DeFi 总锁仓价值</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$0.005</div>
+                <div class="stat-label">平均每笔手续费</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 普通用户 - 从零开始了解 TRON -->
+    <section class="user-section">
+        <div class="section-header">
+            <h2>从零开始，五步掌握 TRON</h2>
+            <p>无需区块链基础，跟着五步走，几分钟即可开始全球自由转账</p>
+        </div>
+        <div class="user-grid">
+            <div class="user-card">
+                <div class="step-badge">第一步</div>
+                <div class="user-card-icon">🤔</div>
+                <h3>什么是 TRON？</h3>
+                <p>TRON 是一个开放的去中心化区块链网络——任何人都可以在上面发送和接收 USDT，无需银行账户，无需申请，费用极低。就像拥有一个全球通用的数字账户，24/7 全天候可用。</p>
+                <a href="/trx" class="user-card-link">
+                    了解更多 →
+                </a>
+            </div>
+            <div class="user-card">
+                <div class="step-badge">第二步</div>
+                <div class="user-card-icon">🔑</div>
+                <h3>创建你的第一个钱包</h3>
+                <p>钱包是你在 Web3 世界的数字身份。TRON 支持多款主流钱包，包括浏览器插件、移动端 App 和硬件钱包。选择一款适合你的，创建账户后请务必离线备份助记词——这是找回资产的唯一凭据。</p>
+                <a href="https://tron.network/wallet/" class="user-card-link">
+                    选择适合你的钱包 →
+                </a>
+            </div>
+            <div class="user-card">
+                <div class="step-badge">第三步</div>
+                <div class="user-card-icon">💸</div>
+                <h3>获取 TRX / USDT</h3>
+                <p>TRX 是 TRON 的原生代币，用于支付网络手续费；USDT (TRC20) 是最常用的稳定币资产。在以下交易所购买后，选择 TRC20 网络提币到你的钱包地址即可。</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+                    <a href="https://www.htx.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#F0F0F0;border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;color:#333;text-decoration:none;border:1px solid #E0E0E0;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#1E80FF"/><text x="8" y="12" text-anchor="middle" font-size="7" font-weight="bold" fill="white">HTX</text></svg>
+                        HTX <span style="color:#1E80FF;font-size:11px;">推荐</span>
+                    </a>
+                    <a href="https://www.binance.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#F0F0F0;border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;color:#333;text-decoration:none;border:1px solid #E0E0E0;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#F3BA2F"/><text x="8" y="12" text-anchor="middle" font-size="7" font-weight="bold" fill="white">B</text></svg>
+                        Binance
+                    </a>
+                    <a href="https://www.okx.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#F0F0F0;border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;color:#333;text-decoration:none;border:1px solid #E0E0E0;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#1A1A1A"/><text x="8" y="12" text-anchor="middle" font-size="6" font-weight="bold" fill="white">OKX</text></svg>
+                        OKX
+                    </a>
+                    <a href="https://www.coinbase.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#F0F0F0;border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;color:#333;text-decoration:none;border:1px solid #E0E0E0;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#0052FF"/><text x="8" y="12" text-anchor="middle" font-size="6" font-weight="bold" fill="white">CB</text></svg>
+                        Coinbase
+                    </a>
+                </div>
+                <a href="https://www.htx.com" target="_blank" class="user-card-link">
+                    前往 HTX 购买 →
+                </a>
+            </div>
+            <div class="user-card">
+                <div class="step-badge">第四步</div>
+                <div class="user-card-icon">✈️</div>
+                <h3>向全球任意地址转账</h3>
+                <p>向任何国家的任何人发送 USDT——3 秒到账，手续费不足 $0.01。无需 SWIFT 代码，无需收款人的银行信息，仅凭一个 TRON 地址即可完成跨境汇款。</p>
+                <a href="https://tronscan.org" class="user-card-link">
+                    在 TronScan 查看转账 →
+                </a>
+                <a href="https://gasfree.io" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:10px 16px;background:linear-gradient(135deg,#0D0D0D,#1A1A2E);border-radius:10px;text-decoration:none;border:1px solid rgba(255,0,19,0.25);">
+                    <span style="font-size:16px;">⚡</span>
+                    <span>
+                        <span style="display:block;font-size:13px;font-weight:700;color:#fff;">GasFree 转账</span>
+                        <span style="display:block;font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px;">无需持有 TRX，直接发送 USDT</span>
+                    </span>
+                    <span style="margin-left:auto;font-size:12px;color:#FF0013;font-weight:600;">了解 →</span>
+                </a>
+            </div>
+            <div class="user-card">
+                <div class="step-badge">第五步</div>
+                <div class="user-card-icon">📈</div>
+                <h3>让资产持续增值</h3>
+                <p>将 USDT 存入 JustLend 赚取稳定利息，或在 SUN.io 提供流动性获取交易手续费分成。所有收益由智能合约自动结算，资金完全由你掌控，随存随取。</p>
+                <a href="https://justlend.org" class="user-card-link">
+                    开始理财 →
+                </a>
+            </div>
+            <div class="user-card user-card-eco">
+                <div class="step-badge">进阶</div>
+                <h3>探索 1,000+ 生态应用</h3>
+                <p>TRON 生态覆盖 DeFi、稳定币、跨链、NFT、预言机等全场景，蓬勃发展的开放生态等你参与</p>
+                <div class="eco-showcase">
+                    <div class="eco-showcase-item">
+                        <div class="eco-icon-mini"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#26A17B"/><text x="12" y="16" text-anchor="middle" font-size="7" font-weight="bold" fill="white">USDD</text></svg></div>
+                        <span>Stablecoin</span>
+                    </div>
+                    <div class="eco-showcase-item">
+                        <div class="eco-icon-mini"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#FF6B35"/><text x="12" y="16" text-anchor="middle" font-size="6" font-weight="bold" fill="white">JL</text></svg></div>
+                        <span>Lending</span>
+                    </div>
+                    <div class="eco-showcase-item">
+                        <div class="eco-icon-mini"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#231F20"/><text x="12" y="16" text-anchor="middle" font-size="6" font-weight="bold" fill="#00D4FF">BTT</text></svg></div>
+                        <span>Cross-chain</span>
+                    </div>
+                    <div class="eco-showcase-item">
+                        <div class="eco-icon-mini"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#8B5CF6"/><text x="12" y="16" text-anchor="middle" font-size="6" font-weight="bold" fill="white">AI</text></svg></div>
+                        <span>AI + NFT</span>
+                    </div>
+                    <div class="eco-showcase-item">
+                        <div class="eco-icon-mini"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#1A1A2E"/><text x="12" y="16" text-anchor="middle" font-size="5" font-weight="bold" fill="#00D4FF">BTFS</text></svg></div>
+                        <span>Storage</span>
+                    </div>
+                    <div class="eco-showcase-item">
+                        <div class="eco-icon-mini"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#00D4FF"/><text x="12" y="16" text-anchor="middle" font-size="5" font-weight="bold" fill="white">WIN</text></svg></div>
+                        <span>Oracle</span>
+                    </div>
+                </div>
+                <a href="#ecosystem" class="user-card-link">
+                    浏览全部生态 →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 开发者 - 我如何在 TRON 上开发 -->
+    <section class="dev-section">
+        <div class="section-header">
+            <h2>在 TRON 上构建下一代 Web3 应用</h2>
+            <p>EVM 兼容、完善工具链、深度流动性——TRON 是构建支付类 DApp 的理想平台</p>
+        </div>
+        <div class="dev-grid">
+            <div class="dev-card">
+                <div class="dev-card-icon">📚</div>
+                <h3>完整的开发者文档</h3>
+                <p>从账户模型、资源机制（Energy & Bandwidth）到 TVM 智能合约、HTTP/gRPC API，中英双语文档全面覆盖。</p>
+                <div class="dev-card-links">
+                    <a href="https://developers.tron.network/" target="_blank" class="dev-link">开发者文档 →</a>
+                    <a href="https://developers.tron.network/docs/getting-started" target="_blank" class="dev-link">快速入门 →</a>
+                </div>
+            </div>
+            <div class="dev-card">
+                <div class="dev-card-icon">🔧</div>
+                <h3>完善的开发工具套件</h3>
+                <p>TronWeb SDK（JS/Python）、TronBox（合约编译部署）、TronIDE（在线 IDE）—— 从本地开发到主网上线，全流程工具覆盖。</p>
+                <div class="dev-card-links">
+                    <a href="https://tronweb.network" target="_blank" class="dev-link">TronWeb</a>
+                    <a href="https://tronbox.dev" target="_blank" class="dev-link">TronBox</a>
+                    <a href="https://github.com/tronprotocol" target="_blank" class="dev-link">GitHub</a>
+                </div>
+            </div>
+            <div class="dev-card">
+                <div class="dev-card-icon">🔍</div>
+                <h3>开放 API 与高可用节点</h3>
+                <p>TronGrid 提供稳定的全节点 RPC 服务（HTTP & gRPC），TronScan Open API 开放完整链上数据，免费额度覆盖大多数开发需求。</p>
+                <div class="dev-card-links">
+                    <a href="https://tronscan.org" target="_blank" class="dev-link">TronScan API</a>
+                    <a href="https://www.trongrid.io" target="_blank" class="dev-link">TronGrid</a>
+                </div>
+            </div>
+            <div class="dev-card">
+                <div class="dev-card-icon">🛡️</div>
+                <h3>安全审计与漏洞赏金</h3>
+                <p>公开的第三方安全审计报告，以及由 HackerOne 托管的漏洞赏金计划（最高奖励 $10,000+）——帮助你构建更安全的 DApp。</p>
+                <div class="dev-card-links">
+                    <a href="/static/doc/TRON_Protocol_Security_Audit_Report.pdf" target="_blank" class="dev-link">审计报告</a>
+                    <a href="https://hackerone.com/tron_dao?type=team" target="_blank" class="dev-link">漏洞赏金</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Preview -->
+    <section class="code-section">
+        <div class="section-header" style="margin-bottom: 40px;">
+            <h2 style="color: #FFFFFF;">5 分钟快速接入 TRON</h2>
+            <p style="color: rgba(255,255,255,0.7);">使用 TronWeb SDK，几行代码即可查询账户、发送 TRX 或集成 USDT 支付</p>
+        </div>
+        <div class="code-container">
+            <div class="code-window">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                </div>
+                <div class="code-content">
+                    <div class="code-line"><span class="code-number">1</span><span class="code-comment">// Install TronWeb</span></div>
+                    <div class="code-line"><span class="code-number">2</span><span class="code-text"><span class="code-keyword">npm</span> install tronweb</span></div>
+                    <div class="code-line"><span class="code-number">3</span><span class="code-text"></span></div>
+                    <div class="code-line"><span class="code-number">4</span><span class="code-comment">// Initialize TronWeb</span></div>
+                    <div class="code-line"><span class="code-number">5</span><span class="code-text"><span class="code-keyword">const</span> TronWeb = <span class="code-keyword">require</span>(<span class="code-string">'tronweb'</span>)</span></div>
+                    <div class="code-line"><span class="code-number">6</span><span class="code-text"></span></div>
+                    <div class="code-line"><span class="code-number">7</span><span class="code-text"><span class="code-keyword">const</span> tronWeb = <span class="code-keyword">new</span> TronWeb({</span></div>
+                    <div class="code-line"><span class="code-number">8</span><span class="code-text">  fullHost: <span class="code-string">'https://api.trongrid.io'</span>,</span></div>
+                    <div class="code-line"><span class="code-number">9</span><span class="code-text">  privateKey: <span class="code-string">'your-private-key'</span></span></div>
+                    <div class="code-line"><span class="code-number">10</span><span class="code-text">})</span></div>
+                    <div class="code-line"><span class="code-number">11</span><span class="code-text"></span></div>
+                    <div class="code-line"><span class="code-number">12</span><span class="code-comment">// Send TRX</span></div>
+                    <div class="code-line"><span class="code-number">13</span><span class="code-text"><span class="code-keyword">const</span> tx = <span class="code-keyword">await</span> tronWeb.transactionBuilder</span></div>
+                    <div class="code-line"><span class="code-number">14</span><span class="code-text">  .sendTrx(<span class="code-string">'toAddress'</span>, <span class="code-string">'100'</span>, <span class="code-string">'fromAddress'</span>)</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRON 生态 -->
+    <section class="ecosystem" id="ecosystem">
+        <div class="section-header">
+            <h2>TRON 生态全景</h2>
+            <p>覆盖 DeFi、稳定币、跨链、基础设施等全场景，1,000+ 活跃 DApp</p>
+        </div>
+        <div class="eco-grid">
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A17B"/><text x="16" y="21" text-anchor="middle" font-size="10" font-weight="bold" fill="white">USDD</text></svg></div>
+                <span class="eco-name">USDD <small>Stablecoin</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF6B35"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">JL</text></svg></div>
+                <span class="eco-name">JustLend DAO <small>Lending</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#231F20"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="#00D4FF">BTT</text></svg></div>
+                <span class="eco-name">BitTorrent Chain <small>Cross-chain</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FFD700"/><text x="16" y="21" text-anchor="middle" font-size="10" font-weight="bold" fill="#1A1A2E">SUN</text></svg></div>
+                <span class="eco-name">SUN.io <small>AMM / DEX</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF0013"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">TL</text></svg></div>
+                <span class="eco-name">TronLink <small>Wallet</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#8B5CF6"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">AI</text></svg></div>
+                <span class="eco-name">AINFT <small>AI + NFT</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#4A90D9"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">im</text></svg></div>
+                <span class="eco-name">imToken <small>Wallet</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#00D4FF"/><text x="16" y="21" text-anchor="middle" font-size="7" font-weight="bold" fill="white">WIN</text></svg></div>
+                <span class="eco-name">WINkLink <small>Oracle</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF9500"/><text x="16" y="21" text-anchor="middle" font-size="7" font-weight="bold" fill="white">TP</text></svg></div>
+                <span class="eco-name">TokenPocket <small>Wallet</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#1A1A2E"/><text x="16" y="21" text-anchor="middle" font-size="7" font-weight="bold" fill="#00D4FF">BTFS</text></svg></div>
+                <span class="eco-name">BTFS <small>Decentralized Storage</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#FF0013"/><text x="16" y="21" text-anchor="middle" font-size="8" font-weight="bold" fill="white">TS</text></svg></div>
+                <span class="eco-name">TronScan <small>Block Explorer</small></span>
+            </div>
+            <div class="eco-item">
+                <div class="eco-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#000000"/><text x="16" y="21" text-anchor="middle" font-size="6" font-weight="bold" fill="white">LG</text></svg></div>
+                <span class="eco-name">Ledger <small>Hardware Wallet</small></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作伙伴 -->
+    <section class="partners">
+        <div class="section-header">
+            <h2>全球合作伙伴</h2>
+        </div>
+        <div class="partner-grid">
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1428A0"/><path d="M24 12C18.477 12 14 16.477 14 22C14 27.523 18.477 32 24 32C29.523 32 34 27.523 34 22C34 16.477 29.523 12 24 12ZM21 18H27V20H21V18ZM21 22H27V30H21V22Z" fill="white"/></svg></div>
+                <span class="partner-name">Samsung</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#26A17B"/><path d="M24 14C19.582 14 16 17.582 16 22H18C18 18.686 20.686 16 24 16C27.314 16 30 18.686 30 22C30 25.314 27.314 28 24 28V30C28.418 30 32 26.418 32 22C32 17.582 28.418 14 24 14Z" fill="white"/></svg></div>
+                <span class="partner-name">Tether</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#FF9900"/><path d="M24 14C18.477 14 14 18.477 14 24C14 29.523 18.477 34 24 34C29.523 34 34 29.523 34 24C34 18.477 29.523 14 24 14Z" fill="white"/><text x="24" y="29" text-anchor="middle" font-size="16" font-weight="bold" fill="#FF9900">a</text></svg></div>
+                <span class="partner-name">Amazon</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#4285F4"/><path d="M24 14C18.477 14 14 18.477 14 24C14 29.523 18.477 34 24 34C29.523 34 34 29.523 34 24H32C32 27.314 29.314 30 26 30C22.686 30 20 27.314 20 24C20 20.686 22.686 18 26 18V14C20.477 14 16 18.477 16 24C16 29.523 20.477 34 26 34H28V30H26C22.686 30 20 27.314 20 24" fill="white"/></svg></div>
+                <span class="partner-name">Google</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#CF0A2C"/><text x="24" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="white">H</text></svg></div>
+                <span class="partner-name">Huawei</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1A1A2E"/><text x="24" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF6B6B">N</text></svg></div>
+                <span class="partner-name">Nansen</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1A1A2E"/><text x="24" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF6B6B">D</text></svg></div>
+                <span class="partner-name">Dune</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#0052CC"/><text x="24" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="white">SCB</text></svg></div>
+                <span class="partner-name">Swisscom</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#E6B91E"/><text x="24" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1A1A2E">P</text></svg></div>
+                <span class="partner-name">Poloniex</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#231F20"/><text x="24" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#00D4FF">BTT</text></svg></div>
+                <span class="partner-name">BitTorrent</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#FF6600"/><text x="24" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="white">O</text></svg></div>
+                <span class="partner-name">Opera</span>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1E1E1E"/><text x="24" y="30" text-anchor="middle" font-size="10" font-weight="bold" fill="#00D4FF">TV</text></svg></div>
+                <span class="partner-name">TradingView</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新动态 -->
+    <section class="news-section">
+        <div class="section-header">
+            <h2>最新资讯</h2>
+        </div>
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-image">
+                    <svg width="400" height="200" viewBox="0 0 400 200">
+                        <rect width="400" height="200" fill="#1A1A2E"/>
+                        <text x="200" y="100" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="16">TRON Network Upgrade</text>
+                    </svg>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">2026-03-15</div>
+                    <h3>TRON Network Completes Major Protocol Upgrade</h3>
+                    <p>The latest upgrade improves throughput, reduces confirmation latency, and strengthens smart contract security across the network.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">
+                    <svg width="400" height="200" viewBox="0 0 400 200">
+                        <rect width="400" height="200" fill="#FF0013"/>
+                        <text x="200" y="100" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="16">USDT Record High</text>
+                    </svg>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">2026-03-10</div>
+                    <h3>USDT on TRON Surpasses $60 Billion in Circulation</h3>
+                    <p>TRC20-USDT reaches a new all-time high, reinforcing TRON's position as the world's largest stablecoin transfer network.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">
+                    <svg width="400" height="200" viewBox="0 0 400 200">
+                        <rect width="400" height="200" fill="#26A17B"/>
+                        <text x="200" y="100" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="16">Global Partnerships</text>
+                    </svg>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">2026-03-05</div>
+                    <h3>TRON DAO Expands Global Partnership Network</h3>
+                    <p>TRON announces new strategic collaborations with leading global enterprises, accelerating mainstream Web3 adoption.</p>
+                </div>
+            </div>
+        </div>
+        <div class="news-footer">
+            <a href="https://tron.network/blog" class="news-more">View All News →</a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>加入全球 25 亿用户</h2>
+        <p>极速转账、DeFi 理财、智能合约开发——TRON 为每一个人提供真正开放的金融基础设施</p>
+        <div class="hero-buttons">
+            <a href="https://tron.network/wallet/" class="btn btn-secondary" style="background: #fff; color: #FF0013;">
+                <span>选择钱包</span>
+            </a>
+            <a href="https://developers.tron.network" class="btn" style="background: transparent; border: 2px solid #fff; color: #fff;">
+                <span>开发者文档</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="tron-footer">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h5>入门</h5>
+                    <ul>
+                        <li><span>学习</span></li>
+                        <li><a href="/trx">什么是 TRX？</a></li>
+                        <li><a href="/usdt">USDT</a></li>
+                        <li><a href="/static/doc/white_paper_v_2_1.pdf" target="_blank">白皮书</a></li>
+                        <li><a href="/faq">常见问题</a></li>
+                        <li><span>快速开始</span></li>
+                        <li><a href="/trx">获取 TRX</a></li>
+                        <li><a href="/wallet">选择钱包</a></li>
+                        <li><a href="https://tronscan.org" target="_blank">区块浏览器</a></li>
+                        <li><a href="https://developers.tron.network/" target="_blank">开发者中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>开发</h5>
+                    <ul>
+                        <li><a href="https://developers.tron.network/" target="_blank">文档</a></li>
+                        <li><a href="https://developers.tron.network/docs/dapp-development-tools" target="_blank">开发工具</a></li>
+                        <li><a href="https://github.com/tronprotocol" target="_blank">GitHub</a></li>
+                        <li><a href="/static/doc/TRON_Protocol_Security_Audit_Report.pdf" target="_blank">审计报告</a></li>
+                        <li><a href="https://hackerone.com/tron_dao?type=team" target="_blank">漏洞赏金</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>生态</h5>
+                    <ul>
+                        <li><a href="https://usdd.io/" target="_blank">USDD</a></li>
+                        <li><a href="https://justlend.org/" target="_blank">JustLend</a></li>
+                        <li><a href="https://sun.io/" target="_blank">Sun.io</a></li>
+                        <li><a href="https://bt.io/" target="_blank">BitTorrent Chain</a></li>
+                        <li><a href="https://www.btfs.io/" target="_blank">BTFS</a></li>
+                        <li><a href="https://ainft.com/" target="_blank">AInft</a></li>
+                        <li><a href="https://winklink.org/#/home" target="_blank">WinKlink</a></li>
+                        <li><a href="https://web3.okx.com/zh-hans/dex-swap" target="_blank">OKX</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>治理</h5>
+                    <ul>
+                        <li><a href="https://tronscan.org/#/sr/representatives" target="_blank">超级代表</a></li>
+                        <li><a href="https://tronscan.org/#/sr/committee" target="_blank">参数</a></li>
+                        <li><a href="https://tronscan.org/#/sr/wallet-stake-home" target="_blank">质押</a></li>
+                        <li><a href="https://tronscan.org/#/sr/votes" target="_blank">投票</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>更多</h5>
+                    <ul>
+                        <li><a href="/resources">资源</a></li>
+                        <li><a href="/career/corevalues/">职业发展</a></li>
+                        <li><a href="/about">关于</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <a href="/"><svg width="96" height="30" viewBox="0 0 96 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1_5515_footer)">
+                        <path d="M72.8609 13.1744C72.0584 13.1744 71.4231 13.8097 71.4231 14.5788C71.4231 15.3478 72.0584 15.9832 72.8609 15.9832C73.6634 15.9832 74.2988 15.3478 74.2988 14.5788C74.2988 13.8097 73.6634 13.1744 72.8609 13.1744Z" fill="white"/>
+                        <path d="M47.5485 7.08868H34.1399V9.3959H47.5485V7.08868Z" fill="white"/>
+                        <path d="M40.3594 11.3019H38.0188V22.0689H40.3594V11.3019Z" fill="white"/>
+                        <path d="M43.7365 11.3019H41.3959V22.0689H43.7365V11.3019Z" fill="white"/>
+                        <path d="M86.002 22.1024H87.9748V16.4514L86.002 14.278V22.1024Z" fill="white"/>
+                        <path d="M93.6596 7.08884V17.6218L82.5917 5.48383V22.1024H84.9323V11.5695L96.0002 23.7074V7.08884H93.6596Z" fill="white"/>
+                        <path d="M72.8611 7.08868C68.6814 7.08868 65.2708 10.4659 65.2708 14.5788C65.2708 18.6916 68.6814 22.0688 72.8611 22.0688C77.0409 22.0688 80.4515 18.6916 80.4515 14.5788C80.4515 10.4659 77.0409 7.08868 72.8611 7.08868ZM72.8611 19.7951C69.952 19.7951 67.6114 17.4544 67.6114 14.6122C67.6114 11.77 69.9855 9.42933 72.8611 9.42933C75.7368 9.42933 78.1109 11.77 78.1109 14.6122C78.1109 17.4544 75.7368 19.7951 72.8611 19.7951Z" fill="white"/>
+                        <path d="M63.3313 11.8369C63.3313 9.22871 61.1913 7.08868 58.5497 7.08868H49.9227V22.1023H52.2299V9.42933H58.5497C59.8872 9.42933 60.9572 10.5328 60.9572 11.8703C60.9572 13.2078 59.8872 14.2778 58.5497 14.3113H53.2665V22.1357H55.5737V16.6185H57.9812L60.9238 22.1357H63.5988L60.4222 16.2172C62.1275 15.4816 63.2979 13.7428 63.2979 11.8703L63.3313 11.8369Z" fill="white"/>
+                        <path d="M21.4002 3.00942L0 1.33514e-05L11.9373 29.5925L28.4222 8.52666L21.4002 3.04286V3.00942ZM24.4431 8.09197L17.488 9.56324L21.0993 5.48382L24.4431 8.09197ZM18.8589 4.81506L14.4117 9.86417L5.55068 2.94254L18.8924 4.81506H18.8589ZM11.7701 23.3396L4.21317 4.64788L13.3751 11.8036L11.7701 23.3396ZM13.8767 23.6406L15.4817 12.2383L24.2424 10.3657L13.8767 23.6406Z" fill="#EA0029"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_1_5515_footer">
+                            <rect width="96" height="30" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg></a>
+                <p><span>© TRON Network</span><a href="/static/doc/Privacy_Policy.pdf" target="_blank">隐私政策</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Header Styles */
+        .tron-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background: rgba(21, 21, 21, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s;
+        }
+
+        .tron-header .header-container {
+            max-width: calc(1340 / 19.2 * 1rem);
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tron-header .header-logo {
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+        }
+
+        .tron-header .header-logo svg {
+            display: block;
+            height: 30px;
+            width: 96px;
+        }
+
+        .tron-header .header-nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .tron-header .nav-item {
+            position: relative;
+        }
+
+        .tron-header .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 0;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .tron-header .nav-link:hover {
+            color: #FF0013;
+        }
+
+        .tron-header .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px 32px;
+            display: none;
+            min-width: 280px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tron-header .nav-item:hover .nav-dropdown {
+            display: flex;
+            gap: 40px;
+        }
+
+        .tron-header .dropdown-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tron-header .dropdown-section.single {
+            min-width: 200px;
+        }
+
+        .tron-header .dropdown-section h6 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .tron-header .dropdown-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-image: linear-gradient(#fff, #fff);
+            background-repeat: no-repeat;
+            background-position: 0% 100%;
+            background-size: 0% 1px;
+        }
+
+        .tron-header .dropdown-section a:hover {
+            background-size: 100% 1px;
+            color: #fff;
+        }
+
+        .tron-header .ecosystem-dropdown {
+            min-width: 400px;
+        }
+
+        .tron-header .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tron-header .search-box input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: #fff;
+            font-size: 14px;
+            width: 200px;
+            transition: all 0.3s;
+        }
+
+        .tron-header .search-box input:focus {
+            outline: none;
+            border-color: #FF0013;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .tron-header .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .tron-header .language-switcher select {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .tron-header .language-switcher select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        /* Footer Styles */
+        .tron-footer {
+            background: #151515;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tron-footer .footer-container {
+            max-width: calc(1340 / 19.2 * 1rem);
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .tron-footer .footer-columns {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tron-footer .footer-column {
+            margin-right: 20px;
+        }
+
+        .tron-footer .footer-column h5 {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .tron-footer .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tron-footer .footer-column ul li {
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .tron-footer .footer-column ul li > span {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+        }
+
+        .tron-footer .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            background-image: linear-gradient(#fff, #fff);
+            background-repeat: no-repeat;
+            background-position: 0% 100%;
+            background-size: 0% 1px;
+            transition: background-size 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+            display: inline-block;
+        }
+
+        .tron-footer .footer-column ul li a:hover {
+            background-size: 100% 1px;
+        }
+
+        .tron-footer .footer-column ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .tron-footer .footer-bottom {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tron-footer .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: calc(1340 / 19.2 * 1rem);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .tron-footer .footer-bottom-content a svg {
+            display: inline-block;
+            height: 30px;
+            width: 96px;
+        }
+
+        .tron-footer .footer-bottom-content p {
+            margin-top: 5px;
+            margin-left: 40px;
+            display: inline-block;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 300;
+            vertical-align: middle;
+        }
+
+        .tron-footer .footer-bottom-content p a {
+            margin-left: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 750px) {
+            .tron-header .header-nav {
+                display: none;
+            }
+
+            .tron-header .header-actions {
+                display: none;
+            }
+
+            .tron-footer .footer-container {
+                padding: 46px 0;
+            }
+
+            .tron-footer .footer-columns {
+                flex-wrap: wrap;
+                max-width: calc(100% - 30px);
+                margin: 0 auto;
+            }
+
+            .tron-footer .footer-column {
+                width: calc(50% - 20px);
+                margin-bottom: 30px;
+            }
+
+            .tron-footer .footer-column h5 {
+                font-size: 16px;
+            }
+
+            .tron-footer .footer-column ul li {
+                white-space: nowrap;
+                margin-bottom: 15px;
+            }
+
+            .tron-footer .footer-column ul li a {
+                font-size: 12px;
+            }
+
+            .tron-footer .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tron-footer .footer-bottom-content p {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</body>
+</html>
